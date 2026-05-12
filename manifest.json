@@ -1,0 +1,16 @@
+{
+  "name": "سجل الواجبات",
+  "short_name": "سجل",
+  "description": "سجل متابعة الطلاب مدرسة أسيد بن حضير",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3426/3426653.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
