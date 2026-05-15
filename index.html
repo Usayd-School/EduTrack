@@ -1,57 +1,480 @@
-.bottom-bar{
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    position:fixed;
+    <title>سجل الواجبات الإلكتروني | Premium Glass UI</title>
 
-    bottom:18px;
-    left:50%;
+    <link href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    transform:translateX(-50%);
+    <style>
 
-    width:90%;
-    max-width:420px;
+        :root{
+            --teacher-gradient: linear-gradient(135deg,#6c5ce7,#a29bfe);
+            --parent-gradient: linear-gradient(135deg,#00b894,#55efc4);
 
-    height:68px;
+            --text-main:#111827;
+            --text-soft:#64748b;
 
-    background:rgba(255,255,255,0.55);
+            --glass-bg:rgba(255,255,255,0.30);
+            --glass-border:rgba(255,255,255,0.38);
+        }
 
-    backdrop-filter:blur(20px);
+        *{
+            box-sizing:border-box;
+            font-family:'Kufam',sans-serif;
+            -webkit-tap-highlight-color:transparent;
+        }
 
-    border:1px solid rgba(255,255,255,0.45);
+        body{
+            margin:0;
+            padding:0;
+            min-height:100vh;
 
-    border-radius:28px;
+            background:
+                radial-gradient(circle at top right,#c4b5fd 0%,transparent 25%),
+                radial-gradient(circle at bottom left,#99f6e4 0%,transparent 25%),
+                linear-gradient(135deg,#f8fafc,#eef2ff);
 
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
+            display:flex;
+            justify-content:center;
+            align-items:center;
 
-    box-shadow:
-        0 10px 30px rgba(0,0,0,0.08);
+            overflow-x:hidden;
+            position:relative;
+        }
 
-    z-index:99;
-}
+        /* الخلفية */
 
-.bottom-item{
+        .bg-circles{
+            position:fixed;
+            inset:0;
+            z-index:-1;
+            overflow:hidden;
+        }
 
-    width:48px;
-    height:48px;
+        .circle{
+            position:absolute;
+            border-radius:50%;
+            filter:blur(90px);
+            opacity:0.55;
+        }
 
-    border-radius:16px;
+        .circle-1{
+            width:320px;
+            height:320px;
+            background:#a78bfa;
+            top:-80px;
+            right:-70px;
+        }
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+        .circle-2{
+            width:260px;
+            height:260px;
+            background:#5eead4;
+            bottom:-60px;
+            left:-60px;
+        }
 
-    font-size:1.3rem;
+        .circle-3{
+            width:220px;
+            height:220px;
+            background:#60a5fa;
 
-    transition:0.3s;
-}
+            top:42%;
+            left:45%;
 
-.bottom-item.active{
+            animation:float 8s ease-in-out infinite;
+        }
 
-    background:linear-gradient(135deg,#6c5ce7,#8b5cf6);
+        @keyframes float{
+            0%{
+                transform:translateY(0px);
+            }
 
-    color:white;
+            50%{
+                transform:translateY(-28px);
+            }
 
-    box-shadow:
-        0 8px 18px rgba(108,92,231,0.35);
-}
+            100%{
+                transform:translateY(0px);
+            }
+        }
+
+        /* المحتوى */
+
+        .container{
+            width:92%;
+            max-width:1100px;
+            padding:30px;
+            position:relative;
+            z-index:2;
+        }
+
+        .header{
+            text-align:center;
+            margin-bottom:45px;
+        }
+
+        .header h1{
+            margin:0;
+
+            font-size:3rem;
+            font-weight:700;
+
+            color:var(--text-main);
+
+            letter-spacing:-1px;
+
+            text-shadow:
+                0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .sub-title{
+            margin-top:16px;
+
+            color:var(--text-soft);
+
+            font-size:1rem;
+            font-weight:500;
+
+            line-height:1.8;
+        }
+
+        .gates-wrapper{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:34px;
+        }
+
+        /* الكروت */
+
+        .glass-card{
+            position:relative;
+            overflow:hidden;
+
+            background:var(--glass-bg);
+
+            backdrop-filter:blur(18px);
+            -webkit-backdrop-filter:blur(18px);
+
+            border:1px solid var(--glass-border);
+
+            border-radius:36px;
+
+            padding:46px 34px;
+
+            text-align:center;
+            text-decoration:none;
+
+            transition:all 0.45s ease;
+
+            box-shadow:
+                0 12px 38px rgba(31,38,135,0.10),
+                inset 0 1px 0 rgba(255,255,255,0.45);
+
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+
+        .glass-card::before{
+            content:'';
+
+            position:absolute;
+
+            width:190px;
+            height:190px;
+
+            background:rgba(255,255,255,0.20);
+
+            border-radius:50%;
+
+            top:-90px;
+            left:-90px;
+
+            transition:0.5s;
+        }
+
+        .glass-card:hover::before{
+            transform:scale(1.4);
+        }
+
+        .glass-card:hover{
+            transform:
+                translateY(-12px)
+                scale(1.02);
+
+            background:rgba(255,255,255,0.40);
+
+            box-shadow:
+                0 28px 65px rgba(0,0,0,0.12);
+        }
+
+        /* الأيقونات */
+
+        .icon-wrapper{
+            width:100px;
+            height:100px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.95),
+                    rgba(255,255,255,0.75)
+                );
+
+            border-radius:30px;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-size:3rem;
+
+            margin-bottom:26px;
+
+            box-shadow:
+                0 12px 28px rgba(0,0,0,0.08);
+
+            transition:0.4s;
+        }
+
+        .glass-card:hover .icon-wrapper{
+            transform:
+                rotate(-6deg)
+                scale(1.08);
+        }
+
+        /* النصوص */
+
+        .glass-card h2{
+            margin:8px 0 14px;
+
+            font-size:1.8rem;
+            font-weight:700;
+
+            color:var(--text-main);
+        }
+
+        .glass-card p{
+            margin:0 0 34px;
+
+            color:#475569;
+
+            line-height:2;
+
+            font-size:0.97rem;
+        }
+
+        /* الأزرار */
+
+        .action-btn{
+            width:100%;
+
+            padding:17px;
+
+            border:none;
+
+            border-radius:22px;
+
+            color:white;
+
+            font-size:1rem;
+            font-weight:700;
+
+            cursor:pointer;
+
+            transition:0.35s;
+
+            position:relative;
+            overflow:hidden;
+
+            box-shadow:
+                0 10px 24px rgba(0,0,0,0.12);
+        }
+
+        .action-btn::before{
+            content:'';
+
+            position:absolute;
+
+            top:0;
+            left:-100%;
+
+            width:100%;
+            height:100%;
+
+            background:rgba(255,255,255,0.22);
+
+            transition:0.5s;
+        }
+
+        .glass-card:hover .action-btn::before{
+            left:100%;
+        }
+
+        .teacher-btn{
+            background:var(--teacher-gradient);
+        }
+
+        .parent-btn{
+            background:var(--parent-gradient);
+        }
+
+        .action-btn:active{
+            transform:scale(0.96);
+        }
+
+        /* شارة */
+
+        .premium-badge{
+            position:absolute;
+
+            top:22px;
+            left:22px;
+
+            background:rgba(255,255,255,0.65);
+
+            border:1px solid rgba(255,255,255,0.55);
+
+            padding:8px 14px;
+
+            border-radius:20px;
+
+            font-size:0.75rem;
+            font-weight:700;
+
+            color:#475569;
+
+            backdrop-filter:blur(12px);
+        }
+
+        /* الجوال */
+
+        @media(max-width:768px){
+
+            .container{
+                padding:22px;
+            }
+
+            .header h1{
+                font-size:2.2rem;
+            }
+
+            .sub-title{
+                font-size:0.92rem;
+            }
+
+            .gates-wrapper{
+                grid-template-columns:1fr;
+            }
+
+            .glass-card{
+                padding:38px 24px;
+            }
+
+            .icon-wrapper{
+                width:90px;
+                height:90px;
+
+                font-size:2.7rem;
+            }
+
+            .glass-card h2{
+                font-size:1.55rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>
+                سجل الواجبات الإلكتروني
+            </h1>
+
+            <p class="sub-title">
+                منصة ذكية وحديثة لمتابعة الواجبات والتقارير المدرسية
+                بسهولة واحترافية
+            </p>
+
+        </div>
+
+        <div class="gates-wrapper">
+
+            <!-- بوابة المعلم -->
+
+            <a href="https://usayd-school.github.io/teacher-gate/" class="glass-card">
+
+                <div class="premium-badge">
+                    Teacher Portal
+                </div>
+
+                <div class="icon-wrapper">
+                    👨‍🏫
+                </div>
+
+                <h2>
+                    بوابة المعلم
+                </h2>
+
+                <p>
+                    إدارة الحصص الدراسية، إرسال التقارير،
+                    متابعة الطلاب، ورصد الأداء اليومي
+                    بواجهة حديثة وسريعة.
+                </p>
+
+                <div class="action-btn teacher-btn">
+                    دخول النظام
+                </div>
+
+            </a>
+
+            <!-- بوابة ولي الأمر -->
+
+            <a href="https://usayd-school.github.io/student-view/" class="glass-card">
+
+                <div class="premium-badge">
+                    Parent Portal
+                </div>
+
+                <div class="icon-wrapper">
+                    👨‍👩‍👧
+                </div>
+
+                <h2>
+                    بوابة ولي الأمر
+                </h2>
+
+                <p>
+                    تابع مستوى ابنك الدراسي،
+                    شاهد التقارير والملاحظات،
+                    واطلع على الواجبات والإنذارات
+                    بشكل لحظي.
+                </p>
+
+                <div class="action-btn parent-btn">
+                    متابعة الآن
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
